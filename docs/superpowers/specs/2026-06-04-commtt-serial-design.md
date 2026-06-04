@@ -22,50 +22,70 @@ canonical_spec: openspec
 
 ## 2. ICommProvider 接口设计（Domain 层）
 
+> **v1.0 契约（已实现，见 plan Task 3）**：本节是 **v1.0 落地后**的契约。原始设计中包含 `ConnectionId` / `ProviderType` / `Task<bool> ConnectAsync` / `Task<int> SendAsync` / 4 个事件 / `CommMetrics GetMetricsSnapshot()` / `ProviderState`（5 态）等扩展，已在 plan 阶段有意收敛为更小的接口；扩展特性列入文末「§2.1 未来扩展」。
+
 ```csharp
-public interface ICommProvider : IDisposable, IAsyncDisposable
+public interface ICommProvider : IDisposable
 {
-    string ConnectionId { get; }
-    string ProviderType { get; }           // "Serial"
-    ProviderState State { get; }           // Disconnected, Connecting, Connected, Error, Disposing
-    
-    // 生命周期
-    Task<bool> ConnectAsync(ProviderConfigBase config, CancellationToken ct = default);
+    event EventHandler<CommEventArgs> DataReceived;
+    event EventHandler<ConnectionState> StateChanged;
+
+    Task ConnectAsync(ICommConfig config, CancellationToken ct = default);
     Task DisconnectAsync(CancellationToken ct = default);
-    
-    // 发送（纯异步，无阻塞）
-    Task<int> SendAsync(ReadOnlyMemory<byte> data, CancellationToken ct = default);
-    
-    // 接收：推模式，Provider 内部分包完成后通过事件推送完整帧
-    event EventHandler<TransportFrameReceivedEventArgs>? DataReceived;
-    event EventHandler<ProtocolFrameReceivedEventArgs>? ProtocolDataReceived;
-    
-    // 状态与错误
-    event EventHandler<ProviderStateChangedEventArgs>? StateChanged;
-    event EventHandler<ProviderErrorEventArgs>? ErrorOccurred;
-    
-    // 指标快照（原子读取，无锁）
-    CommMetrics GetMetricsSnapshot();
+    Task SendAsync(ReadOnlyMemory<byte> data, CancellationToken ct = default);
+
+    ConnectionState State { get; }
 }
 
-public enum ProviderState
+public interface ICommConfig { }
+
+public interface IProtocolSplitter
 {
-    Disconnected,
-    Connecting,
-    Connected,
-    Error,
-    Disposing
+    bool TrySplit(ReadOnlySequence<byte> buffer, out ReadOnlySequence<byte> frame, out SequencePosition consumed);
 }
 
-public record TransportFrame(ReadOnlySequence<byte> Payload, DateTimeOffset Timestamp, string ConnectionId);
-public record ProtocolFrame(string ProtocolName, object StructuredData, TransportFrame Source);
+public interface IProtocolParser
+{
+    CommDataFrame Parse(ReadOnlySequence<byte> frame);
+}
+
+public record CommDataFrame(DateTimeOffset Timestamp, ReadOnlyMemory<byte> Raw, string? ParsedText = null);
+
+public record SerialConfig(
+    string PortName,
+    int BaudRate,
+    int DataBits = 8,
+    System.IO.Ports.Parity Parity = System.IO.Ports.Parity.None,
+    System.IO.Ports.StopBits StopBits = System.IO.Ports.StopBits.One
+) : ICommConfig;
+
+public enum ConnectionState { Disconnected, Connecting, Connected, Error }
+
+public class CommEventArgs : EventArgs
+{
+    public CommDataFrame Frame { get; init; } = null!;
+}
 ```
 
 **关键决策**：
-- **推模式（Push）**：上层无需轮询，Provider 内部分包完成后直接推送完整帧
-- **状态机**：严格状态转换，状态变更通过 `StateChanged` 事件传播到 UI
-- **连接 ID**：由 `ConnectionManager` 生成 8 字符 UUID，全局唯一标识
-- **双重接收事件**：`DataReceived`（Layer 1 TransportFrame，原始帧）+ `ProtocolDataReceived`（Layer 2 ProtocolFrame，结构化帧）
+- **推模式（Push）**：上层无需轮询，Provider 接收循环完成后通过 `DataReceived` 事件推送 `CommDataFrame`
+- **状态机**：4 态 `ConnectionState`；状态变更通过 `StateChanged` 事件传播到 UI
+- **协议层抽象**：`IProtocolSplitter`（Layer 1 分帧）+ `IProtocolParser`（Layer 2 解析），先实现核心协议，后续可扩展
+- **`SerialConfig` 承载 Provider 专属配置**：通过 `ICommConfig` 标记接口统一抽象，新增 Provider 时新建对应 `XxxConfig : ICommConfig`
+
+### 2.1 未来扩展（v1.1+ 候选，**未实现**）
+
+原始设计中的扩展特性在 v1.0 收敛为更小接口后未实现，列入未来扩展候选：
+
+- `ConnectionId` / `ProviderType` —— 用于多 Provider 实例管理（`ConnectionManager` 多 Provider 场景）
+- `Task<bool> ConnectAsync` / `Task<int> SendAsync` —— 让连接/发送返回是否成功、写入字节数
+- `event ProtocolDataReceived` —— Layer 2 协议帧事件（与 `DataReceived` 拆分）
+- `event ErrorOccurred` —— 错误事件（与状态变更拆分）
+- `CommMetrics GetMetricsSnapshot()` —— 指标快照（v1.0 由 `MetricsAggregator` 单独承载）
+- `ProviderState` 5 态（含 `Disposing`）—— 精确生命周期
+- `TransportFrame` / `ProtocolFrame` —— Layer 1 / Layer 2 帧类型拆分（v1.0 合并为 `CommDataFrame`）
+
+实现时机：随 v1.1+ 引入多 Provider 管理（`ConnectionManager` 多实例 Dictionary）、精细错误处理、指标下沉到 Provider 等需求时引入。
 
 ---
 
