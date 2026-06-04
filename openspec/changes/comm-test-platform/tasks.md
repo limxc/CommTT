@@ -7,12 +7,12 @@
   - `MetricsAggregator`：原子计数器 + 后台定时聚合线程 — Plan Task 5 ✅
   - `AlertEngine`：简单表达式规则解析与阈值触发判断 — Plan Task 5 ✅
 - [x] **实现 Infrastructure 层数据持久化**：EF Core + SQLite 上下文、串口配置表、收发日志表、告警历史表 — Plan Task 6 ✅（EF migration 延后到 Task 11）
-- [ ] **实现 Serial Provider（Infrastructure 层）**：
+- [x] **实现 Serial Provider（Infrastructure 层）**：
   - 基于 `SerialPort.BaseStream.ReadAsync/WriteAsync` 的纯异步 IO
   - 端口自动扫描（`SerialPort.GetPortNames()`）
   - 参数配置：波特率/数据位/校验/停止位/流控
   - 后台接收循环（`Task` + `CancellationToken`）+ `Channel<T>` 向引擎推送数据
-  - 封装为 `SerialProviderModule`（Prism IModule）
+  - 封装为 `SerialProviderModule`（Prism IModule）— Plan Task 7 ✅（Module 封装在 Plan Task 12）
 - [ ] **实现 UI Shell（Presentation 层）**：
   - 主窗口布局：左侧 NavigationRegion + 右侧 ContentRegion
   - 动态导航菜单：根据已加载的 Provider Module 动态添加菜单项
