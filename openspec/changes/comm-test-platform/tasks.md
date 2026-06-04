@@ -1,6 +1,6 @@
 - [x] **项目初始化**：创建 .NET 10 WPF 解决方案结构（Solution），按 Clean Architecture 分层：Domain / Application / Infrastructure / UI (Presentation)
-- [ ] **引入 Prism 框架**：配置 Prism Bootstrapper（或 App.xaml.cs 中 ConfigureServices）、RegionManager、ModuleCatalog
-- [ ] **引入 MaterialDesignInXamlToolkit**：配置主题资源（App.xaml）、暗色/亮色主题切换基础
+- [x] **引入 Prism 框架**：配置 Prism Bootstrapper（或 App.xaml.cs 中 ConfigureServices）、RegionManager、ModuleCatalog
+- [x] **引入 MaterialDesignInXamlToolkit**：配置主题资源（App.xaml）、暗色/亮色主题切换基础
 - [ ] **定义 Domain 层核心抽象**：`ICommProvider` 接口、`CommMetrics` / `ProviderConfigBase` / `AlertRule` 模型、领域事件
 - [ ] **实现 Application 层核心引擎**：
   - `ConnectionManager`：多 Provider 实例生命周期管理（Dictionary<string, ICommProvider>）
