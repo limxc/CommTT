@@ -12,7 +12,7 @@
   - 端口自动扫描（`SerialPort.GetPortNames()`）
   - 参数配置：波特率/数据位/校验/停止位/流控
   - 后台接收循环（`Task` + `CancellationToken`）+ `Channel<T>` 向引擎推送数据
-  - 封装为 `SerialProviderModule`（Prism IModule）— Plan Task 7 ✅（Module 封装在 Plan Task 12，Splitters 在 Plan Task 8 ✅，Parsers 在 Plan Task 9）
+  - 封装为 `SerialProviderModule`（Prism IModule）— Plan Task 7 ✅（Module 封装在 Plan Task 12，Splitters 在 Plan Task 8 ✅，Parsers 在 Plan Task 9 ✅）
 - [ ] **实现 UI Shell（Presentation 层）**：
   - 主窗口布局：左侧 NavigationRegion + 右侧 ContentRegion
   - 动态导航菜单：根据已加载的 Provider Module 动态添加菜单项
