@@ -1,13 +1,19 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
+using Prism.DryIoc;
+using Prism.Ioc;
+using Prism.Modularity;
 
 namespace CommTT.Shell;
 
-/// <summary>
-/// Interaction logic for App.xaml
-/// </summary>
-public partial class App : System.Windows.Application
+public partial class App : PrismApplication
 {
-}
+    private readonly Bootstrapper _bootstrapper = new();
 
+    protected override Window CreateShell() => Container.Resolve<MainWindow>();
+
+    protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        => _bootstrapper.RegisterTypes(containerRegistry);
+
+    protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+        => _bootstrapper.ConfigureModuleCatalog(moduleCatalog);
+}
