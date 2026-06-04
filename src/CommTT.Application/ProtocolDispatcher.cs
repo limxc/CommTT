@@ -1,4 +1,3 @@
-using System.Buffers;
 using System.IO.Pipelines;
 using CommTT.Application.Interfaces;
 using CommTT.Domain.Events;
