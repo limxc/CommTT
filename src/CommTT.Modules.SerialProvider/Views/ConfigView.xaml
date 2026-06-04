@@ -1,0 +1,11 @@
+<UserControl x:Class="CommTT.Modules.SerialProvider.Views.ConfigView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <StackPanel Margin="16">
+        <TextBox Text="{Binding PortName}" materialDesign:HintAssist.Hint="Port Name"/>
+        <TextBox Text="{Binding BaudRate}" materialDesign:HintAssist.Hint="Baud Rate"/>
+        <Button Content="Connect" Command="{Binding ConnectCommand}" Margin="0,8,0,0"/>
+        <Button Content="Disconnect" Command="{Binding DisconnectCommand}" Margin="0,4,0,0"/>
+    </StackPanel>
+</UserControl>
