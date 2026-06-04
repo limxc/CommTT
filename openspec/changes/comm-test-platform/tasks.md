@@ -2,10 +2,10 @@
 - [x] **引入 Prism 框架**：配置 Prism Bootstrapper（或 App.xaml.cs 中 ConfigureServices）、RegionManager、ModuleCatalog
 - [x] **引入 MaterialDesignInXamlToolkit**：配置主题资源（App.xaml）、暗色/亮色主题切换基础
 - [x] **定义 Domain 层核心抽象**：`ICommProvider` 接口、`CommMetrics` / `ProviderConfigBase` / `AlertRule` 模型、领域事件
-- [ ] **实现 Application 层核心引擎**：
+- [x] **实现 Application 层核心引擎**：
   - `ConnectionManager`：多 Provider 实例生命周期管理（Dictionary<string, ICommProvider>）— Plan Task 4 ✅
-  - `MetricsAggregator`：原子计数器 + 后台定时聚合线程 — Plan Task 5
-  - `AlertEngine`：简单表达式规则解析与阈值触发判断 — Plan Task 5
+  - `MetricsAggregator`：原子计数器 + 后台定时聚合线程 — Plan Task 5 ✅
+  - `AlertEngine`：简单表达式规则解析与阈值触发判断 — Plan Task 5 ✅
 - [ ] **实现 Infrastructure 层数据持久化**：EF Core + SQLite 上下文、串口配置表、收发日志表、告警历史表
 - [ ] **实现 Serial Provider（Infrastructure 层）**：
   - 基于 `SerialPort.BaseStream.ReadAsync/WriteAsync` 的纯异步 IO
