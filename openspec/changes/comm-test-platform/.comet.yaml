@@ -1,0 +1,17 @@
+workflow: full
+phase: build
+design_doc: docs/superpowers/specs/2026-06-04-commtt-serial-design.md
+plan: docs/superpowers/plans/2026-06-04-commtt-serial-build.md
+base_ref: null
+build_mode: null
+build_pause: null
+isolation: null
+verify_mode: null
+verify_result: pending
+verification_report: null
+branch_status: pending
+created_at: 2026-06-04
+verified_at: null
+archived: false
+handoff_context: openspec/changes/comm-test-platform/.comet/handoff/design-context.json
+handoff_hash: 9D1BEC300A3CE508B75B91D7EB97BA28BFE7D966AA0BEFDAA81986BC19383323

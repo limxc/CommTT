@@ -1,0 +1,31 @@
+- [ ] **项目初始化**：创建 .NET 8 WPF 解决方案结构（Solution），按 Clean Architecture 分层：Domain / Application / Infrastructure / UI (Presentation)
+- [ ] **引入 Prism 框架**：配置 Prism Bootstrapper（或 App.xaml.cs 中 ConfigureServices）、RegionManager、ModuleCatalog
+- [ ] **引入 MaterialDesignInXamlToolkit**：配置主题资源（App.xaml）、暗色/亮色主题切换基础
+- [ ] **定义 Domain 层核心抽象**：`ICommProvider` 接口、`CommMetrics` / `ProviderConfigBase` / `AlertRule` 模型、领域事件
+- [ ] **实现 Application 层核心引擎**：
+  - `ConnectionManager`：多 Provider 实例生命周期管理（Dictionary<string, ICommProvider>）
+  - `MetricsAggregator`：原子计数器 + 后台定时聚合线程
+  - `AlertEngine`：简单表达式规则解析与阈值触发判断
+- [ ] **实现 Infrastructure 层数据持久化**：EF Core + SQLite 上下文、串口配置表、收发日志表、告警历史表
+- [ ] **实现 Serial Provider（Infrastructure 层）**：
+  - 基于 `SerialPort.BaseStream.ReadAsync/WriteAsync` 的纯异步 IO
+  - 端口自动扫描（`SerialPort.GetPortNames()`）
+  - 参数配置：波特率/数据位/校验/停止位/流控
+  - 后台接收循环（`Task` + `CancellationToken`）+ `Channel<T>` 向引擎推送数据
+  - 封装为 `SerialProviderModule`（Prism IModule）
+- [ ] **实现 UI Shell（Presentation 层）**：
+  - 主窗口布局：左侧 NavigationRegion + 右侧 ContentRegion
+  - 动态导航菜单：根据已加载的 Provider Module 动态添加菜单项
+  - 主题切换：暗色/亮色（Material Design 内置）
+- [ ] **实现 Serial UI 模块（Presentation 层）**：
+  - 配置视图：端口扫描下拉框、波特率等参数配置卡
+  - 收发视图：发送区（文本/十六进制、定时发送）、接收区（滚动日志、暂停/清屏）、快捷命令
+  - 监控视图：吞吐量卡片、连接状态指示灯（Material Design 风格）
+- [ ] **实现开发调试模式**：手动连接/断开、单条/批量发送、实时报文查看（文本 + 十六进制切换）
+- [ ] **实现压力测试模式（Serial 场景）**：多串口同时发送、配置发送频率与载荷、实时性能图表
+- [ ] **实现生产监控模式（Serial 场景）**：多串口长期连接、状态看板（红绿灯）、告警日志面板、阈值配置
+- [ ] **测试与验证**：
+  - Domain / Application 层单元测试（无需启动 WPF）
+  - Serial Provider 集成测试（需真实串口设备或虚拟串口对）
+  - UI 交互测试、压力基准测试（多串口并发发送）
+- [ ] **打包与文档**：README 使用说明、架构说明（Clean Architecture + Prism 模块开发指南）、发布单文件 exe

@@ -1,0 +1,24 @@
+{
+  "change": "comm-test-platform",
+  "phase": "design",
+  "canonical_spec": "openspec",
+  "sources": [
+    {
+      "path": "openspec/changes/comm-test-platform/proposal.md",
+      "sha256": "AC58FB67BF3F4B018C5511B390E135963114D531CD0D156B4424D3BCC8B38F3F",
+      "mode": "compact"
+    },
+    {
+      "path": "openspec/changes/comm-test-platform/design.md",
+      "sha256": "EEE93915F82222D71EF4396B952A0BC8B63628F01270B3ECD0A2CFD944A54845",
+      "mode": "compact"
+    },
+    {
+      "path": "openspec/changes/comm-test-platform/tasks.md",
+      "sha256": "1D3FBDAF955ABD678EDE515C6EB317EF59969584F3B261D0D16C20BABBD7BB3F",
+      "mode": "compact"
+    }
+  ],
+  "generated_at": "2026-06-04",
+  "tool": "comet-handoff"
+}
