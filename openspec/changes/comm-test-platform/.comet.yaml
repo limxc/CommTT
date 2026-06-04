@@ -14,4 +14,5 @@ created_at: 2026-06-04
 verified_at: null
 archived: false
 handoff_context: openspec/changes/comm-test-platform/.comet/handoff/design-context.json
-handoff_hash: 9D1BEC300A3CE508B75B91D7EB97BA28BFE7D966AA0BEFDAA81986BC19383323
+handoff_hash: b14cb843f29c67583335f73cb2cf45b7214c60530d01dd95cfb310b19b4f2954
+build_command: dotnet build CommTT.sln

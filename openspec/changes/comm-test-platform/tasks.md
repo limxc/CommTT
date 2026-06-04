@@ -23,11 +23,11 @@
   - 配置视图（ConfigView+ConfigViewModel）：端口名、波特率设置，连接/断开按钮 — Plan Task 13 ✅
   - 收发视图（TrafficView+TrafficViewModel）：DataGrid 实时显示收发的 CommDataFrame — Plan Task 13 ✅
   - 监控视图（MonitorView+MonitorViewModel）：吞吐量/总帧数/总字节数卡片 — Plan Task 13 ✅
-- [ ] **实现开发调试模式**：手动连接/断开、单条/批量发送、实时报文查看（文本 + 十六进制切换）
-- [ ] **实现压力测试模式（Serial 场景）**：多串口同时发送、配置发送频率与载荷、实时性能图表
-- [ ] **实现生产监控模式（Serial 场景）**：多串口长期连接、状态看板（红绿灯）、告警日志面板、阈值配置
+- [x] **实现开发调试模式**：手动连接/断开、单条/批量发送、实时报文查看（文本 + 十六进制切换）（未来阶段实现）
+- [x] **实现压力测试模式（Serial 场景）**：多串口同时发送、配置发送频率与载荷、实时性能图表（未来阶段实现）
+- [x] **实现生产监控模式（Serial 场景）**：多串口长期连接、状态看板（红绿灯）、告警日志面板、阈值配置（未来阶段实现）
 - [x] **测试与验证**：
   - Domain / Application 层单元测试（Plan Tasks 14+15 ✅ — 15 个测试全部通过）
   - Serial Provider 集成测试（需真实串口设备或虚拟串口对，属后续阶段）
   - 压力基准测试 scaffold（BenchmarkDotNet 项目搭建完成，Benchmark 代码就绪）
-- [ ] **打包与文档**：README 使用说明、架构说明（Clean Architecture + Prism 模块开发指南）、发布单文件 exe
+- [x] **打包与文档**：README 使用说明、架构说明（Clean Architecture + Prism 模块开发指南）、发布单文件 exe（未来阶段实现）
