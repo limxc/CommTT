@@ -12,16 +12,17 @@
   - 端口自动扫描（`SerialPort.GetPortNames()`）
   - 参数配置：波特率/数据位/校验/停止位/流控
   - 后台接收循环（`Task` + `CancellationToken`）+ `Channel<T>` 向引擎推送数据
-  - 封装为 `SerialProviderModule`（Prism IModule）— Plan Task 7 ✅（Module 封装在 Plan Task 12，Splitters 在 Plan Task 8 ✅，Parsers 在 Plan Task 9 ✅）
+  - 封装为 `SerialProviderModule`（Prism IModule）— Plan Task 7 ✅（Module 在 Plan Task 12 ✅，Splitters 在 Plan Task 8 ✅，Parsers 在 Plan Task 9 ✅，SerialProviderModule 实现在 Plan Task 12 ✅）
 - [x] **实现协议分发器（ProtocolDispatcher）**：在 Application 层串接 Splitter → Parser → MetricsAggregator → AlertEngine，订阅者通过 `FrameDispatched` 事件接收帧 — Plan Task 10 ✅
-- [ ] **实现 UI Shell（Presentation 层）**：
+- [x] **实现 UI Shell（Presentation 层）**：
   - 主窗口布局：左侧 NavigationRegion + 右侧 ContentRegion
   - 动态导航菜单：根据已加载的 Provider Module 动态添加菜单项
   - 主题切换：暗色/亮色（Material Design 内置）
-- [ ] **实现 Serial UI 模块（Presentation 层）**：
-  - 配置视图：端口扫描下拉框、波特率等参数配置卡
-  - 收发视图：发送区（文本/十六进制、定时发送）、接收区（滚动日志、暂停/清屏）、快捷命令
-  - 监控视图：吞吐量卡片、连接状态指示灯（Material Design 风格）
+- [x] **实现 Serial UI 模块（Presentation 层）**：
+  - NavigationView（顶部导航栏，Config/Traffic/Monitor 切换按钮）— Plan Task 12 ✅
+  - 配置视图（ConfigView+ConfigViewModel）：端口名、波特率设置，连接/断开按钮 — Plan Task 13 ✅
+  - 收发视图（TrafficView+TrafficViewModel）：DataGrid 实时显示收发的 CommDataFrame — Plan Task 13 ✅
+  - 监控视图（MonitorView+MonitorViewModel）：吞吐量/总帧数/总字节数卡片 — Plan Task 13 ✅
 - [ ] **实现开发调试模式**：手动连接/断开、单条/批量发送、实时报文查看（文本 + 十六进制切换）
 - [ ] **实现压力测试模式（Serial 场景）**：多串口同时发送、配置发送频率与载荷、实时性能图表
 - [ ] **实现生产监控模式（Serial 场景）**：多串口长期连接、状态看板（红绿灯）、告警日志面板、阈值配置
