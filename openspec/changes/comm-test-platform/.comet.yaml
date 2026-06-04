@@ -2,7 +2,7 @@ workflow: full
 phase: build
 design_doc: docs/superpowers/specs/2026-06-04-commtt-serial-design.md
 plan: docs/superpowers/plans/2026-06-04-commtt-serial-build.md
-base_ref: efd1b01c3a90ce35e6f1b0330bc6359baecb8837
+base_ref: 073a734ae643c8625706e5f469edcf0d78b2e6bb
 build_mode: subagent-driven-development
 build_pause: null
 isolation: branch
