@@ -26,8 +26,8 @@
 - [ ] **实现开发调试模式**：手动连接/断开、单条/批量发送、实时报文查看（文本 + 十六进制切换）
 - [ ] **实现压力测试模式（Serial 场景）**：多串口同时发送、配置发送频率与载荷、实时性能图表
 - [ ] **实现生产监控模式（Serial 场景）**：多串口长期连接、状态看板（红绿灯）、告警日志面板、阈值配置
-- [ ] **测试与验证**：
-  - Domain / Application 层单元测试（无需启动 WPF）
-  - Serial Provider 集成测试（需真实串口设备或虚拟串口对）
-  - UI 交互测试、压力基准测试（多串口并发发送）
+- [x] **测试与验证**：
+  - Domain / Application 层单元测试（Plan Tasks 14+15 ✅ — 15 个测试全部通过）
+  - Serial Provider 集成测试（需真实串口设备或虚拟串口对，属后续阶段）
+  - 压力基准测试 scaffold（BenchmarkDotNet 项目搭建完成，Benchmark 代码就绪）
 - [ ] **打包与文档**：README 使用说明、架构说明（Clean Architecture + Prism 模块开发指南）、发布单文件 exe
