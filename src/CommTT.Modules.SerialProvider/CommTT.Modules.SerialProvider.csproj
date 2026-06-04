@@ -12,4 +12,9 @@
     <PackageReference Include="System.IO.Pipelines" Version="10.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CommTT.Domain\CommTT.Domain.csproj" />
+    <ProjectReference Include="..\CommTT.Application\CommTT.Application.csproj" />
+  </ItemGroup>
+
 </Project>
