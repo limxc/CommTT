@@ -178,14 +178,14 @@ git commit -m "chore: init solution with 7 projects and references"
 
 ```bash
 cd src/CommTT.Shell
-dotnet add package Prism.Wpf --version 9.0.401-pre
-dotnet add package Prism.DryIoc --version 9.0.401-pre
-dotnet add package MaterialDesignInXamlToolkit --version 5.1.0
+dotnet add package Prism.Wpf --version 9.0.537
+dotnet add package Prism.DryIoc --version 9.0.537
+dotnet add package MaterialDesignThemes --version 5.3.2
 cd ../..
 
 cd src/CommTT.Modules.SerialProvider
-dotnet add package Prism.Wpf --version 9.0.401-pre
-dotnet add package MaterialDesignInXamlToolkit --version 5.1.0
+dotnet add package Prism.Wpf --version 9.0.537
+dotnet add package MaterialDesignThemes --version 5.3.2
 cd ../..
 ```
 
@@ -193,12 +193,12 @@ cd ../..
 
 ```bash
 cd src/CommTT.Infrastructure
-dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 8.0.10
-dotnet add package System.IO.Pipelines --version 8.0.0
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 10.0.8
+dotnet add package System.IO.Pipelines --version 10.0.0
 cd ../..
 
 cd src/CommTT.Modules.SerialProvider
-dotnet add package System.IO.Pipelines --version 8.0.0
+dotnet add package System.IO.Pipelines --version 10.0.0
 cd ../..
 ```
 
@@ -207,12 +207,15 @@ cd ../..
 ```bash
 cd tests/CommTT.Tests.Unit
 dotnet add package Moq --version 4.20.72
-dotnet add package FluentAssertions --version 6.12.1
-dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 8.0.10
+dotnet add package FluentAssertions --version 8.10.0
+dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 10.0.8
+dotnet add package Microsoft.NET.Test.Sdk --version 18.6.0
+dotnet add package xunit --version 2.9.3
+dotnet add package xunit.runner.visualstudio --version 3.1.4
 cd ../..
 
 cd tests/CommTT.Tests.Benchmark
-dotnet add package BenchmarkDotNet --version 0.14.0
+dotnet add package BenchmarkDotNet --version 0.15.8
 cd ../..
 ```
 
