@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
@@ -22,12 +22,14 @@
 
   <ItemGroup>
     <Using Include="Xunit" />
+    <Using Include="FluentAssertions" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\CommTT.Domain\CommTT.Domain.csproj" />
     <ProjectReference Include="..\..\src\CommTT.Application\CommTT.Application.csproj" />
     <ProjectReference Include="..\..\src\CommTT.Infrastructure\CommTT.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\CommTT.Modules.SerialProvider\CommTT.Modules.SerialProvider.csproj" />
   </ItemGroup>
 
 </Project>
