@@ -22,7 +22,7 @@
 **Why**: 工业自动化和物联网开发中，工程师需要与多种通讯协议（串口、TCP/UDP、MQTT、WebSocket、CAN）进行交互测试。缺乏统一测试平台。
 
 **What（本期 v1.0）**:
-- 基于 .NET 8 WPF + Prism + MaterialDesignInXamlToolkit 的统一测试工具
+- 基于 .NET 10 WPF + Prism + MaterialDesignInXamlToolkit 的统一测试工具
 - **整洁架构（Clean Architecture）** + **插件式架构（Prism Module）**
 - **本期范围**：仅实现 **Serial（串口）** 完整测试功能
 - 核心引擎：ConnectionManager、MetricsAggregator、AlertEngine
@@ -42,7 +42,7 @@
 
 ### design.md — 高层架构决策
 
-**1. 技术栈**: .NET 8 WPF + Prism + MaterialDesignInXamlToolkit + SQLite + DryIoc
+**1. 技术栈**: .NET 10 WPF + Prism + MaterialDesignInXamlToolkit + SQLite + DryIoc
 
 **2. 整洁架构 + 插件式 Provider**:
 - 四层：Domain → Application → Infrastructure → Presentation

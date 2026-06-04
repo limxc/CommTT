@@ -1,14 +1,14 @@
 ## 架构决策
 
-### 1. 技术栈选型：.NET 8 WPF + Prism + MaterialDesignInXamlToolkit + SQLite
+### 1. 技术栈选型：.NET 10 WPF + Prism + MaterialDesignInXamlToolkit + SQLite
 
-**决策**：后端采用 .NET 8，UI 采用 WPF + Prism 框架 + MaterialDesignInXamlToolkit，本地数据使用 SQLite。
+**决策**：后端采用 .NET 10，UI 采用 WPF + Prism 框架 + MaterialDesignInXamlToolkit，本地数据使用 SQLite。
 
 **理由**：
 - **Prism**：提供模块化（Modularity）、导航（Navigation）、事件聚合（EventAggregator）、依赖注入（DI），天然支持插件式架构
 - **MaterialDesignInXamlToolkit**：提供现代化的 Material Design 风格控件，减少自定义样式工作量，UI 专业度高
 - **WPF**：与 Prism 深度集成，数据绑定（MVVM）适合实时监控场景
-- **.NET 8**：原生支持 Serial、TCP/UDP，MQTT 有成熟库（MQTTnet），性能足以支撑万级并发压力测试
+- **.NET 10**：原生支持 Serial、TCP/UDP，MQTT 有成熟库（MQTTnet），性能足以支撑万级并发压力测试
 - **SQLite**：零部署、单文件，适合现场工程师直接拷贝使用，无需安装数据库服务
 - **整洁架构 + 插件式**：Domain / Application / Infrastructure / UI 分层，Provider 作为独立模块动态加载
 

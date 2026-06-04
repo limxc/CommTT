@@ -2,11 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build CommTT v1.0 — a .NET 8 WPF + Prism + MaterialDesign serial communication test platform with Clean Architecture and plugin-based provider system.
+**Goal:** Build CommTT v1.0 — a .NET 10 WPF + Prism + MaterialDesign serial communication test platform with Clean Architecture and plugin-based provider system.
 
 **Architecture:** Clean Architecture 4-layer (Domain → Application → Infrastructure → Presentation) + Prism modular UI + System.IO.Pipelines for zero-copy high-throughput serial I/O.
 
-**Tech Stack:** .NET 8, WPF, Prism.Wpf, DryIoc, MaterialDesignInXamlToolkit, System.IO.Pipelines, EF Core SQLite, xUnit, BenchmarkDotNet, Moq, FluentAssertions
+**Tech Stack:** .NET 10, WPF, Prism.Wpf, DryIoc, MaterialDesignInXamlToolkit, System.IO.Pipelines, EF Core SQLite, xUnit, BenchmarkDotNet, Moq, FluentAssertions
 
 ---
 

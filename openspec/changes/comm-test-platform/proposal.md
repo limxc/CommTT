@@ -4,7 +4,7 @@
 
 ## What Changes
 
-- **新建通讯测试平台桌面应用**：基于 .NET 8 WPF + Prism + MaterialDesignInXamlToolkit 的统一测试工具，采用整洁架构（Clean Architecture）+ 插件式架构
+- **新建通讯测试平台桌面应用**：基于 .NET 10 WPF + Prism + MaterialDesignInXamlToolkit 的统一测试工具，采用整洁架构（Clean Architecture）+ 插件式架构
 - **本期范围（v1.0）**：实现 Serial（串口）通讯测试的完整功能，包括配置、收发、监控
 - **架构预留**：定义 `ICommProvider` 统一接口，核心引擎（调度、指标采集、告警）基于接口设计，为 TCP/UDP、MQTT、WebSocket、CAN 等后续协议预留 Provider 模块位置和动态加载机制
 - **核心引擎（本期实现）**：
@@ -37,7 +37,7 @@
 
 ## Impact
 
-- **新项目初始化**：需创建 .NET 8 WPF 解决方案结构，采用 Clean Architecture 分层
+- **新项目初始化**：需创建 .NET 10 WPF 解决方案结构，采用 Clean Architecture 分层
 - **依赖库**：
   - `Prism.Wpf` + `Prism.DryIoc`（模块化、导航、DI）
   - `MaterialDesignInXamlToolkit`（UI 主题与控件）
