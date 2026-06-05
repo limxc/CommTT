@@ -2,7 +2,7 @@ using System.IO;
 using CommTT.Application.Interfaces;
 using CommTT.Application.Services;
 using CommTT.Infrastructure.Data;
-using CommTT.Infrastructure.Logging;
+using CommTT.Application.Logging;
 using CommTT.Modules.SerialProvider;
 using Microsoft.Extensions.Logging;
 using Prism.Ioc;

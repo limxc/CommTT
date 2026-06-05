@@ -1,15 +1,16 @@
 using System.Text;
+using CommTT.Domain.Models;
 
-namespace CommTT.Infrastructure.Logging;
+namespace CommTT.Application.Logging;
 
-public class ProtocolExceptionLogger
+public class ProtocolStateLogger
 {
     private readonly string _baseDir;
     private readonly Lock _lock = new();
     private string? _currentFile;
     private StreamWriter? _writer;
 
-    public ProtocolExceptionLogger(string baseDir = "")
+    public ProtocolStateLogger(string baseDir = "")
     {
         _baseDir = string.IsNullOrEmpty(baseDir)
             ? Path.Combine(AppContext.BaseDirectory, "Logs")
@@ -17,10 +18,10 @@ public class ProtocolExceptionLogger
     }
 
     public void Write(string protocolType, string connectionId,
-        string exceptionType, string message, string context, string rawDataSnapshot)
+        ConnectionState oldState, ConnectionState newState, string triggerReason, string details)
     {
         EnsureWriter();
-        var line = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} | {protocolType} | {connectionId} | {exceptionType} | {message} | {context} | Raw: {rawDataSnapshot}";
+        var line = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} | {protocolType} | {connectionId} | {oldState} → {newState} | {triggerReason} | {details}";
         lock (_lock)
         {
             _writer!.WriteLine(line);
@@ -31,7 +32,7 @@ public class ProtocolExceptionLogger
     private void EnsureWriter()
     {
         var dir = Path.Combine(_baseDir, DateTime.Now.ToString("yyyyMMdd"));
-        var file = Path.Combine(dir, "protocol-exception.txt");
+        var file = Path.Combine(dir, "protocol-state.txt");
         if (file != _currentFile)
         {
             Directory.CreateDirectory(dir);

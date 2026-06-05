@@ -3,7 +3,7 @@ using System.IO.Ports;
 using CommTT.Domain.Events;
 using CommTT.Domain.Interfaces;
 using CommTT.Domain.Models;
-using CommTT.Infrastructure.Logging;
+using CommTT.Application.Logging;
 using Microsoft.Extensions.Logging;
 
 namespace CommTT.Modules.SerialProvider.Services;
