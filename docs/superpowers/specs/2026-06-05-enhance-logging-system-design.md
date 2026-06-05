@@ -2,6 +2,8 @@
 comet_change: enhance-logging-system
 role: technical-design
 canonical_spec: openspec
+archived-with: 2026-06-05-enhance-logging-system
+status: final
 ---
 
 # Design Doc: Enhance Logging System for CommTT
@@ -201,5 +203,7 @@ var line = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} | {protocolType} | {connectionId
 - [ ] 修改 `CommTT.Application/Services/ConnectionManager.cs`
 - [ ] `CommTT.Tests.Unit/` 新增 Logger 相关单元测试
 
+archived-with: 2026-06-05-enhance-logging-system
+status: final
 ---
 *关联 OpenSpec change: [enhance-logging-system](../openspec/changes/enhance-logging-system/)*
