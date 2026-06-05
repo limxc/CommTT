@@ -2,6 +2,8 @@
 comet_change: comm-test-platform
 role: technical-design
 canonical_spec: openspec
+archived-with: 2026-06-05-comm-test-platform
+status: final
 ---
 
 # CommTT Serial Provider & Core Engine — Technical Design Document
@@ -18,6 +20,8 @@ canonical_spec: openspec
 
 **范围边界**：本期仅实现 Serial Provider，TCP/UDP/MQTT/WebSocket/CAN 在架构中预留接口。
 
+archived-with: 2026-06-05-comm-test-platform
+status: final
 ---
 
 ## 2. ICommProvider 接口设计（Domain 层）
@@ -87,6 +91,8 @@ public class CommEventArgs : EventArgs
 
 实现时机：随 v1.1+ 引入多 Provider 管理（`ConnectionManager` 多实例 Dictionary）、精细错误处理、指标下沉到 Provider 等需求时引入。
 
+archived-with: 2026-06-05-comm-test-platform
+status: final
 ---
 
 ## 3. Serial Provider 实现（Infrastructure 层）
@@ -188,6 +194,8 @@ public class SerialProvider : ICommProvider
 - **零拷贝分帧**：`ReadOnlySequence<byte>.Slice()` 不产生新内存，只是引用切片
 - **三任务并行**：Fill → Split → Parse 形成流水线，最大化吞吐
 
+archived-with: 2026-06-05-comm-test-platform
+status: final
 ---
 
 ## 4. Layer 1：流式分帧器（IFrameSplitter）
@@ -344,6 +352,8 @@ public class FixedLengthSplitter : IFrameSplitter
 }
 ```
 
+archived-with: 2026-06-05-comm-test-platform
+status: final
 ---
 
 ## 5. Layer 2：预制协议解析器
@@ -566,6 +576,8 @@ public class HeaderFixedLengthParser : ProtocolParserBase
 public record HeaderFixedLengthFrameData(byte[] Header, byte[] Payload, byte[]? Checksum);
 ```
 
+archived-with: 2026-06-05-comm-test-platform
+status: final
 ---
 
 ## 6. ProtocolDispatcher（Application 层）
@@ -616,6 +628,8 @@ public class ProtocolDispatcher
 }
 ```
 
+archived-with: 2026-06-05-comm-test-platform
+status: final
 ---
 
 ## 7. ConnectionManager（Application 层）
@@ -665,6 +679,8 @@ public class ConnectionManager : IConnectionManager
 }
 ```
 
+archived-with: 2026-06-05-comm-test-platform
+status: final
 ---
 
 ## 8. MetricsAggregator（Application 层）
@@ -725,6 +741,8 @@ public class ProviderCounters
 }
 ```
 
+archived-with: 2026-06-05-comm-test-platform
+status: final
 ---
 
 ## 9. AlertEngine（Application 层）
@@ -780,6 +798,8 @@ public class AlertEngine : IAlertEngine
 }
 ```
 
+archived-with: 2026-06-05-comm-test-platform
+status: final
 ---
 
 ## 10. SQLite 数据持久化（Infrastructure 层）
@@ -827,6 +847,8 @@ public class AlertRecord
 }
 ```
 
+archived-with: 2026-06-05-comm-test-platform
+status: final
 ---
 
 ## 11. Prism Module 架构与 UI 数据流
@@ -879,6 +901,8 @@ SerialTrafficView (View)
                     └── ICommProvider.SendAsync() → 返回结果
 ```
 
+archived-with: 2026-06-05-comm-test-platform
+status: final
 ---
 
 ## 12. 完整测试策略
@@ -1331,6 +1355,8 @@ dotnet run --project tests/CommTT.SerialProvider.Benchmarks -c Release
 # 输出：BenchmarkDotNet.Artifacts/results/*.md
 ```
 
+archived-with: 2026-06-05-comm-test-platform
+status: final
 ---
 
 ## 13. 关键设计决策总结

@@ -1,0 +1,17 @@
+{
+  "change": "enhance-logging-system",
+  "phase": "design",
+  "mode": "compact",
+  "canonical_spec": "openspec",
+  "generated_by": "comet-handoff.sh",
+  "context_hash": "212c782f89d4d85e8bae4d200ef622729bdc4e05f98d406e988ecd3b5da53a5d",
+  "files": [
+    { "path": "openspec/changes/enhance-logging-system/proposal.md", "sha256": "15122adc58d709a53969460972d46e89e714ace7af04be24793ff3d8edf768ac" },
+    { "path": "openspec/changes/enhance-logging-system/design.md", "sha256": "b4177f9afde1198df0b1e820826c09cac867aaf26d368dedd166380e2fc164ca" },
+    { "path": "openspec/changes/enhance-logging-system/tasks.md", "sha256": "9e6ba1f2635b13ba8b0a71556d8a0b350079ccbcc631acd2392f25a38db8c162" },
+    { "path": "openspec/changes/enhance-logging-system/specs/protocol-exception-logging/spec.md", "sha256": "b844e687ba58b0ad3dcc2cfcc902191151f34ae29746d3afe7d574bbdf796a2d" },
+    { "path": "openspec/changes/enhance-logging-system/specs/protocol-state-logging/spec.md", "sha256": "1d67c8ccb40f10626e16ead4cf6888414eccdaa4626d8c5c25bcdcbfd061014a" },
+    { "path": "openspec/changes/enhance-logging-system/specs/runtime-error-logging/spec.md", "sha256": "95019132562e654bb828c750464c54e7cb7f9f935397b43a0012bc74c46dd1d5" },
+    { "path": "openspec/changes/enhance-logging-system/specs/structured-logging/spec.md", "sha256": "9bc8c725b8acc867281de5f4a4341bd029d63dc094cc9f8d0dbfccaed63f30ea" }
+  ]
+}

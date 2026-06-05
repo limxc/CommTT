@@ -1,0 +1,11 @@
+- [ ] 引入日志 NuGet 包依赖（Serilog、Serilog.Sinks.File、Microsoft.Extensions.Logging.Abstractions）
+- [ ] 创建 `ProtocolExceptionLogger`（Infrastructure 层），负责向 `Logs/<YYYYMMDD>/protocol-exception.txt` 写入纯文本
+- [ ] 创建 `ProtocolStateLogger`（Infrastructure 层），负责向 `Logs/<YYYYMMDD>/protocol-state.txt` 写入纯文本
+- [ ] 在 Bootstrapper 中配置 Serilog：软件运行时观测日志输出到 `Logs/<YYYYMMDD>/runtime.txt`，按天自动创建目录
+- [ ] 在 `SerialCommProvider` 注入 `ILogger<SerialCommProvider>`（runtime 日志）并调用 `ProtocolExceptionLogger` / `ProtocolStateLogger` 记录关键异常与状态变化
+- [ ] 在 `ProtocolDispatcher` 注入 `ILogger<ProtocolDispatcher>`（runtime 日志）并在解析异常时调用 `ProtocolExceptionLogger`
+- [ ] 在 `ConnectionManager` 桥接 `StateChanged` 事件并调用 `ProtocolStateLogger`
+- [ ] 在 `Bootstrapper` / `App.xaml.cs` 中配置全局未捕获异常处理器，将异常写入 runtime.txt
+- [ ] 确保审计日志写入不阻塞通讯线程（使用 `StreamWriter` 异步锁或 `FileStream` 缓冲）
+- [ ] 运行应用并验证目录结构：`Logs/<YYYYMMDD>/` 下生成 `runtime.txt`、`protocol-exception.txt`、`protocol-state.txt`，且均为纯文本格式
+- [ ] 验证纯文本可读性：直接用记事本打开三类日志文件，确认人类可直接阅读
