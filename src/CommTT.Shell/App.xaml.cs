@@ -11,7 +11,7 @@ namespace CommTT.Shell;
 public partial class App : PrismApplication
 {
     private readonly Bootstrapper _bootstrapper = new();
-    private static ILogger? _staticLogger;
+    private static ILoggerFactory? _staticLoggerFactory;
 
     protected override Window CreateShell() => Container.Resolve<MainWindow>();
 
@@ -33,7 +33,9 @@ public partial class App : PrismApplication
             .WriteTo.File(
                 path: Path.Combine(logDir, "runtime.txt"),
                 outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {SourceContext}: {Message}{NewLine}{Exception}");
-        _staticLogger = loggerConfig.CreateLogger<App>();
+        var serilogLogger = loggerConfig.CreateLogger();
+        _staticLoggerFactory = new LoggerFactory();
+        _staticLoggerFactory.AddSerilog(serilogLogger);
 
         DispatcherUnhandledException += OnDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += OnAppDomainUnhandledException;
@@ -44,7 +46,7 @@ public partial class App : PrismApplication
     {
         try
         {
-            var logger = _staticLogger ?? Container?.Resolve<ILogger<App>>();
+            var logger = _staticLoggerFactory?.CreateLogger<App>() ?? Container?.Resolve<ILogger<App>>();
             logger?.LogError(e.Exception, "Unhandled UI exception");
         }
         catch { /* avoid recursive exception */ }
@@ -57,7 +59,7 @@ public partial class App : PrismApplication
         {
             if (e.ExceptionObject is Exception ex)
             {
-                var logger = _staticLogger ?? Container?.Resolve<ILogger<App>>();
+                var logger = _staticLoggerFactory?.CreateLogger<App>() ?? Container?.Resolve<ILogger<App>>();
                 logger?.LogError(ex, "Unhandled AppDomain exception");
             }
         }
@@ -68,7 +70,7 @@ public partial class App : PrismApplication
     {
         try
         {
-            var logger = _staticLogger ?? Container?.Resolve<ILogger<App>>();
+            var logger = _staticLoggerFactory?.CreateLogger<App>() ?? Container?.Resolve<ILogger<App>>();
             logger?.LogError(e.Exception, "Unobserved task exception");
         }
         catch { /* avoid recursive exception */ }
@@ -77,10 +79,7 @@ public partial class App : PrismApplication
 
     protected override void OnExit(ExitEventArgs e)
     {
-        if (_staticLogger is IDisposable disposableLogger)
-        {
-            disposableLogger.Dispose();
-        }
+        _staticLoggerFactory?.Dispose();
         base.OnExit(e);
     }
 }
