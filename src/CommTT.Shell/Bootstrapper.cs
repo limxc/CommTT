@@ -20,20 +20,24 @@ public class Bootstrapper
         containerRegistry.RegisterSingleton<IAlertEngine, AlertEngine>();
         containerRegistry.RegisterSingleton<AppDbContext>();
 
-        // Configure Serilog runtime log
-        var logDir = Path.Combine(AppContext.BaseDirectory, "Logs", DateTime.Now.ToString("yyyyMMdd"));
-        Directory.CreateDirectory(logDir);
-
-        var logger = new LoggerConfiguration()
-            .MinimumLevel.Information()
-            .WriteTo.File(
-                path: Path.Combine(logDir, "runtime.txt"),
-                outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {SourceContext}: {Message}{NewLine}{Exception}")
-            .CreateLogger();
+        // Use the static logger factory from App (already initialized in OnStartup)
+        var loggerFactory = App.LoggerFactory;
+        if (loggerFactory == null)
+        {
+            // Fallback: create a new logger factory if static one is not available
+            var logDir = Path.Combine(AppContext.BaseDirectory, "Logs", DateTime.Now.ToString("yyyyMMdd"));
+            Directory.CreateDirectory(logDir);
+            var logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .WriteTo.File(
+                    path: Path.Combine(logDir, "runtime.txt"),
+                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {SourceContext}: {Message}{NewLine}{Exception}")
+                .CreateLogger();
+            loggerFactory = new LoggerFactory();
+            loggerFactory.AddSerilog(logger);
+        }
 
         // Register M.E.L factory with Serilog
-        var loggerFactory = new LoggerFactory();
-        loggerFactory.AddSerilog(logger);
         containerRegistry.RegisterInstance<ILoggerFactory>(loggerFactory);
 
         // Register generic ILogger<T> factory
