@@ -71,25 +71,3 @@ brainstorming → delta spec → 实施 → 验证 → 主 spec 覆盖 → desig
 ## 完成
 
 Comet 流程全部完成。如需开始新工作，调用 `/comet` 或 `/comet-open`。
-
-询问用户是否同步更新项目 README：
-
-> "Comet 流程已完成。是否将此次 proposal 内容同步到项目 README？"
-
-- **是：** 按以下规则自行处理（独立于 Comet 工作流，不影响已完成的状态）
-
-  Proposal 格式可能变更，不按章节名硬匹配，按**内容类型**分类映射：
-
-  | 内容类型 | README 章节 | 策略 |
-  |---------|------------|------|
-  | 🔵 **项目目的/定位**（描述 Why、背景、动机） | `## 简介` | 覆盖，以最新 proposal 为准 |
-  | 🟢 **项目细节/功能**（描述做了什么、范围、变更内容） | `## 功能特性` | 整合，保留之前仍适用的细节 |
-  | 🟡 **实现状态**（已实现和规划中的能力） | `## 路线图` | 整合，分 ✅ 已实现 / ⏳ 规划中 |
-
-  根据 `README.md` 是否存在走不同分支：
-
-  **不存在：** 按时间升序遍历 `openspec/changes/archive/*/proposal.md` + 当前 proposal，整合生成，提交 `git commit -m "docs: init README from proposals"`
-
-  **已存在：** 读取当前 proposal.md，更新 README 对应章节，保留其他手动编辑部分，提交 `git commit -m "docs: update README with <change-name>"`
-
-- **否：** 跳过

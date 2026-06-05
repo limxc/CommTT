@@ -1,0 +1,7 @@
+- [x] 在 App 类中添加静态 Serilog logger 字段
+- [x] 修改 OnStartup 方法，在注册异常处理器之前初始化静态 logger
+- [x] 修改 OnDispatcherUnhandledException 方法，优先使用静态 logger
+- [x] 修改 OnAppDomainUnhandledException 方法，优先使用静态 logger
+- [x] 修改 OnUnobservedTaskException 方法，优先使用静态 logger
+- [x] 添加 OnExit 方法，dispose 静态 logger
+- [x] 运行测试验证修复
