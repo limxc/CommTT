@@ -15,3 +15,5 @@ verified_at: null
 archived: false
 handoff_context: openspec/changes/enhance-logging-system/.comet/handoff/design-context.json
 handoff_hash: 212c782f89d4d85e8bae4d200ef622729bdc4e05f98d406e988ecd3b5da53a5d
+build_command: dotnet build
+verify_command: dotnet test tests/CommTT.Tests.Unit/CommTT.Tests.Unit.csproj
