@@ -2,7 +2,7 @@ using System.Text;
 
 namespace CommTT.Application.Logging;
 
-public class ProtocolExceptionLogger
+public class ProtocolExceptionLogger : IDisposable
 {
     private readonly string _baseDir;
     private readonly Lock _lock = new();
@@ -36,8 +36,15 @@ public class ProtocolExceptionLogger
         {
             Directory.CreateDirectory(dir);
             _writer?.Dispose();
-            _writer = new StreamWriter(file, append: true, encoding: Encoding.UTF8);
+            _writer = new StreamWriter(new FileStream(file, FileMode.Append, FileAccess.Write, FileShare.Read), Encoding.UTF8);
             _currentFile = file;
         }
+    }
+
+    public void Dispose()
+    {
+        _writer?.Dispose();
+        _writer = null;
+        _currentFile = null;
     }
 }
