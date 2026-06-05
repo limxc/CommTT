@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CommTT.Domain\CommTT.Domain.csproj" />
     <ProjectReference Include="..\CommTT.Application\CommTT.Application.csproj" />
+    <ProjectReference Include="..\CommTT.Infrastructure\CommTT.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
